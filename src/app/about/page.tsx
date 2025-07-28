@@ -1,9 +1,15 @@
-'use client';
+"use client";
+
+import AnimatedBackground from "@/components/AnimatedBackground";
 
 export default function AboutPage() {
   return (
-    <div className="bg-black text-white min-h-screen px-6 py-16">
-      <div className="max-w-5xl mx-auto">
+    <div className="relative min-h-screen px-6 py-16 bg-gradient-to-tr from-black via-zinc-900 to-red-950 text-zinc-300 overflow-hidden">
+      {/* Анимација и позадина */}
+      <AnimatedBackground />
+
+      {/* Содржина која е над анимацијата */}
+      <div className="relative max-w-5xl mx-auto z-10">
         <h1 className="text-4xl font-bold text-red-600 mb-6 text-center">
           O nama
         </h1>
@@ -23,7 +29,6 @@ export default function AboutPage() {
 
         <h2 className="text-3xl font-semibold text-red-500 mb-8 text-center">Naši treneri</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {/* Marko Makić */}
           <div className="bg-zinc-900 rounded-xl p-4 text-center shadow-md">
             <img
               src="/trainers/marko.jpg"
@@ -41,7 +46,6 @@ export default function AboutPage() {
             </p>
           </div>
 
-          {/* Uroš Jovanović */}
           <div className="bg-zinc-900 rounded-xl p-4 text-center shadow-md">
             <img
               src="/trainers/uros.jpg"
@@ -59,7 +63,6 @@ export default function AboutPage() {
             </p>
           </div>
 
-          {/* Aleksandar Makić */}
           <div className="bg-zinc-900 rounded-xl p-4 text-center shadow-md">
             <img
               src="/trainers/aleksandar.jpg"
@@ -78,7 +81,6 @@ export default function AboutPage() {
             </p>
           </div>
 
-          {/* Ana Ristić */}
           <div className="bg-zinc-900 rounded-xl p-4 text-center shadow-md flex flex-col items-center justify-center">
             <img
               src="/trainers/ana.jpg"
