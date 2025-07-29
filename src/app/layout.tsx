@@ -4,6 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import AnimatedBackground from "@/components/AnimatedBackground"; // додадено
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,13 +29,21 @@ export default function RootLayout({
   return (
     <html lang="sr" className="w-full h-full">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen w-full flex flex-col
-          bg-gradient-to-br from-black via-red-950 to-red-800 text-white overflow-x-hidden`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen w-full flex flex-col 
+          bg-gradient-to-br from-black via-red-950 to-red-800 text-white overflow-x-hidden relative`}
       >
+        {/* 🔴 Глобална позадина */}
+        <AnimatedBackground />
+
+        {/* Навигација */}
         <Navbar />
-        <main className="flex-grow w-full px-6 py-10 bg-transparent">
+
+        {/* Главна содржина */}
+        <main className="flex-grow w-full px-6 py-10 bg-transparent relative z-10">
           {children}
         </main>
+
+        {/* Футер */}
         <Footer />
       </body>
     </html>
