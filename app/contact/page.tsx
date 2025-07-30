@@ -3,95 +3,113 @@
 import { useState } from "react";
 
 export default function ContactPage() {
-  const [status, setStatus] = useState<string | null>(null);
+  const [form, setForm] = useState({
+    ime: "",
+    email: "",
+    poruka: "",
+  });
 
-  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  const [status, setStatus] = useState<{ type: "success" | "error"; message: string } | null>(null);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setStatus(null);
 
-    const formData = new FormData(e.currentTarget);
-    const data = {
-      name: formData.get("name"),
-      email: formData.get("email"),
-      message: formData.get("message"),
-    };
+    if (!form.ime || !form.email || !form.poruka) {
+      setStatus({ type: "error", message: "Molimo popunite sva polja." });
+      return;
+    }
 
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify(form),
       });
 
-      const json = await res.json();
-
       if (res.ok) {
-        setStatus("Poruka je uspešno poslata.");
-        e.currentTarget.reset();
+        setStatus({ type: "success", message: "Poruka je uspešno poslata." });
+        setForm({ ime: "", email: "", poruka: "" });
       } else {
-        setStatus(json.error || "Greška prilikom slanja.");
+        const json = await res.json();
+        setStatus({ type: "error", message: json.error || "Greška prilikom slanja." });
       }
     } catch {
-      setStatus("Greška prilikom povezivanja sa serverom.");
+      setStatus({ type: "error", message: "Greška prilikom povezivanja sa serverom." });
     }
-  }
+  };
 
   return (
-    <div className="min-h-screen px-6 py-16 bg-gradient-to-tr from-black via-zinc-900 to-red-950 text-zinc-300 overflow-hidden">
-      <div className="max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold text-red-600 mb-10 text-center">Kontakt</h1>
-        <form
-          onSubmit={handleSubmit}
-          className="bg-zinc-900 rounded-lg p-8 shadow-lg space-y-6 border border-red-700"
-        >
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium mb-2 text-red-500">
-              Ime i prezime
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              required
-              className="w-full rounded-md border border-red-600 bg-black px-4 py-2 text-white placeholder-red-400 focus:ring-red-500 outline-none transition"
-              placeholder="Unesite ime"
-            />
-          </div>
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium mb-2 text-red-500">
-              Email adresa
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              required
-              className="w-full rounded-md border border-red-600 bg-black px-4 py-2 text-white placeholder-red-400 focus:ring-red-500 outline-none transition"
-              placeholder="Unesite email"
-            />
-          </div>
-          <div>
-            <label htmlFor="message" className="block text-sm font-medium mb-2 text-red-500">
-              Poruka
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              rows={5}
-              required
-              className="w-full rounded-md border border-red-600 bg-black px-4 py-2 text-white placeholder-red-400 focus:ring-red-500 outline-none transition resize-none"
-              placeholder="Vaša poruka"
-            />
-          </div>
-          <button
-            type="submit"
-            className="bg-red-600 hover:bg-red-700 transition-colors text-white font-semibold py-3 px-6 rounded-md w-full"
-          >
-            Pošalji
-          </button>
-        </form>
-        {status && <p className="mt-4 text-center text-red-500">{status}</p>}
+    <form
+      onSubmit={handleSubmit}
+      className="max-w-3xl mx-auto space-y-6 bg-zinc-900 p-8 rounded-xl shadow-lg border border-red-600 text-white mt-10"
+    >
+      <h1 className="text-3xl font-bold text-red-600 mb-6 text-center">Kontakt</h1>
+
+      <div>
+        <label htmlFor="ime" className="block mb-1 font-semibold">
+          Ime i prezime:
+        </label>
+        <input
+          type="text"
+          id="ime"
+          name="ime"
+          value={form.ime}
+          onChange={handleChange}
+          required
+          className="w-full p-3 rounded bg-zinc-800 border border-zinc-700 text-white"
+        />
       </div>
-    </div>
+
+      <div>
+        <label htmlFor="email" className="block mb-1 font-semibold">
+          Email adresa:
+        </label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={form.email}
+          onChange={handleChange}
+          required
+          className="w-full p-3 rounded bg-zinc-800 border border-zinc-700 text-white"
+        />
+      </div>
+
+      <div>
+        <label htmlFor="poruka" className="block mb-1 font-semibold">
+          Poruka:
+        </label>
+        <textarea
+          id="poruka"
+          name="poruka"
+          value={form.poruka}
+          onChange={handleChange}
+          rows={5}
+          required
+          className="w-full p-3 rounded bg-zinc-800 border border-zinc-700 text-white resize-none"
+        />
+      </div>
+
+      <button
+        type="submit"
+        className="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded font-semibold transition-colors"
+      >
+        Pošalji
+      </button>
+
+      {status && (
+        <p
+          className={`mt-4 text-center font-semibold ${
+            status.type === "success" ? "text-green-500" : "text-red-500"
+          }`}
+        >
+          {status.message}
+        </p>
+      )}
+    </form>
   );
 }
