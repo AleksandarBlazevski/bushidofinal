@@ -81,64 +81,122 @@ export default function AboutPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   const toggleCard = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
+    setOpenIndex((prevIndex) => (prevIndex === index ? null : index));
   };
 
   return (
     <div className="relative min-h-screen px-6 py-16 bg-gradient-to-tr from-black via-zinc-900 to-red-950 text-zinc-300 overflow-hidden">
-      {/* Анимација и позадина */}
       <AnimatedBackground />
-
-      {/* Содржина која е над анимацијата */}
-      <div className="relative max-w-5xl mx-auto z-10">
-        <h1 className="text-4xl font-bold text-red-600 mb-6 text-center">
+      <div className="relative max-w-6xl mx-auto z-10">
+        <h1
+          className="text-6xl font-extrabold text-red-600 mb-12 text-center tracking-wide
+          transition-colors duration-300 cursor-pointer hover:text-red-400 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.9)]"
+        >
           O nama
         </h1>
 
-        <p className="text-lg leading-relaxed mb-6">
-          Karate klub "Bušido SAN", je osnovan 10.03.2020. godine. Osnivači su višegodišnji vežbači ove plemenite veštine. Naziv, tj. ime kluba, inspirisano je pre svega samim značenjem Bušido koda samuraja, dok SAN (jap. broj 3) predstavlja sinboličan broj od tri osnivača.
-        </p>
-        <p className="text-lg leading-relaxed mb-6">
-          Stil koji se vežba u ovom klubu je redak u Srbiji, a on u sebi, pored karate tehnika, sadrži i elemente iz džudoa i điudžice.
-        </p>
-        <p className="text-lg leading-relaxed mb-6">
-          Metodologija treninga bazira se pre svega na disciplini i pedagoškim vrednostima, dok ako govorimo o psiho-fizičkim veštinama, akcenat se pored tehnika, taktika i motoričkih vežbi, stavlja na jačanju mentalnog sklopa, samokontroli i strpljennu.
-        </p>
-        <p className="text-lg leading-relaxed mb-6">
-          Moto ovog kluba je da se svakim treningom, odnosno, svakim danom, u svim segmentima života, karatista bude bolji od sebe, a ne od protivnika. OSS
-        </p>
+        {[
+          `Karate klub `,
+          `Stil koji se vežba u ovom klubu je redak u Srbiji, a on u sebi, pored karate tehnika, sadrži i elemente iz džudoa i điudžice.`,
+          `Metodologija treninga bazira se pre svega na disciplini i pedagoškim vrednostima, dok ako govorimo o psiho-fizičkim veštinama, akcenat se pored tehnika, taktika i motoričkih vežbi, stavlja na jačanju mentalnog sklopa, samokontroli i strpljenju.`,
+          `Moto ovog kluba je da se svakim treningom, odnosno, svakim danom, u svim segmentima života, karatista bude bolji od sebe, a ne od protivnika. OSS`,
+        ].map((text, i) => (
+          <p
+            key={i}
+            className="text-xl leading-relaxed mb-8 max-w-4xl mx-auto text-zinc-300"
+          >
+            {i === 0 ? (
+              <>
+                Karate klub{" "}
+                <span className="font-semibold text-red-500">Bušido SAN</span>, je
+                osnovan 10.03.2020. godine. Osnivači su višegodišnji vežbači ove
+                plemenite veštine. Naziv, tj. ime kluba, inspirisano je pre svega
+                samim značenjem Bušido koda samuraja, dok SAN (jap. broj 3)
+                predstavlja simboličan broj od tri osnivača.
+              </>
+            ) : (
+              text
+            )}
+          </p>
+        ))}
 
-        <h2 className="text-3xl font-semibold text-red-500 mb-8 text-center">Naši treneri</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <h2 className="text-4xl font-extrabold text-red-500 mb-12 text-center tracking-wide">
+          Naši treneri
+        </h2>
+
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {trainers.map((trainer, index) => (
             <div
               key={index}
-              className="bg-zinc-900 rounded-xl p-4 text-center shadow-md cursor-pointer select-none"
               onClick={() => toggleCard(index)}
+              className={`bg-zinc-800 rounded-2xl p-8 cursor-pointer select-none shadow-lg transition-shadow duration-300 flex flex-col items-center
+                hover:shadow-[0_0_15px_4px_rgba(239,68,68,0.7)]`}
+              style={{ minHeight: "510px" }}
             >
               <img
                 src={trainer.imgSrc}
                 alt={trainer.alt}
-                className="w-full h-52 object-cover object-top rounded-lg mb-4 border border-red-600"
+                className="w-full h-64 object-cover rounded-xl border-2 border-red-600 mb-6"
+                loading="lazy"
+                style={{ objectPosition: "center top" }}
               />
-              <h3 className="text-xl font-semibold text-red-500">
-                {trainer.name} {trainer.rank && `- ${trainer.rank}`}
+              <h3 className="text-3xl font-extrabold text-red-500 mb-4 text-center break-words whitespace-normal leading-tight">
+                {trainer.name}{" "}
+                {trainer.rank && (
+                  <span className="text-red-400 font-semibold text-xl">
+                    - {trainer.rank}
+                  </span>
+                )}
               </h3>
-              {openIndex === index && (
-                <p className="text-sm mt-2 text-gray-300 text-left">
-                  {trainer.birthDate}, {trainer.birthPlace}.
-                  <br />
+
+              {openIndex === index ? (
+                <div
+                  className="text-zinc-300 text-lg leading-relaxed max-w-xs text-center"
+                  style={{ transition: "all 0.3s ease" }}
+                >
+                  <p className="mb-3 font-semibold">
+                    Rođen: {trainer.birthDate}, {trainer.birthPlace}
+                  </p>
                   {trainer.bio.map((line, i) => (
-                    <span key={i}>
+                    <p key={i} className="mb-3">
                       {line}
-                      <br />
-                    </span>
+                    </p>
                   ))}
+                </div>
+              ) : (
+                <p className="text-lg text-zinc-400 italic max-w-xs text-center select-none">
+                  Klikni za detalje
                 </p>
               )}
             </div>
           ))}
         </div>
+
+        {/* Dodatna sekcija za termine treninga */}
+        <section className="mt-16 max-w-4xl mx-auto bg-zinc-900 bg-opacity-70 rounded-2xl p-6 border border-red-600 shadow-md text-center text-zinc-300">
+          <h2 className="text-3xl font-extrabold text-red-500 mb-6">
+            Termini treninga
+          </h2>
+          <p className="mb-8 font-semibold text-lg">Od 1. septembra 2025. godine</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-lg font-medium">
+            <div className="hover:text-red-500 transition cursor-default">
+              <p>📅 <strong>Ponedeljak</strong> u 18:30h</p>
+              <p>📍 Hala sportova, Pariske komune 20</p>
+            </div>
+            <div className="hover:text-red-500 transition cursor-default">
+              <p>📅 <strong>Utorak</strong> u 18:30h</p>
+              <p>📍 Puls Fitness, Bulevar Arsenija Čarnojevića 165</p>
+            </div>
+            <div className="hover:text-red-500 transition cursor-default">
+              <p>📅 <strong>Četvrtak</strong> u 20:00h</p>
+              <p>📍 Hala sportova, Pariske komune 20</p>
+            </div>
+            <div className="hover:text-red-500 transition cursor-default">
+              <p>📅 <strong>Petak</strong> u 18:30h</p>
+              <p>📍 Puls Fitness, Bulevar Arsenija Čarnojevića 165</p>
+            </div>
+          </div>
+        </section>
       </div>
     </div>
   );

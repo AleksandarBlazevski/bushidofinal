@@ -1,19 +1,16 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter } from "next/font/google"; // вметнуваме Inter font
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import AnimatedBackground from "@/components/AnimatedBackground"; // додадено
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+// Креираме Inter font instance со variable CSS property за Tailwind
+const inter = Inter({
   subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: "--font-inter",
+  weight: ["400", "600"],
 });
 
 export const metadata: Metadata = {
@@ -29,8 +26,8 @@ export default function RootLayout({
   return (
     <html lang="sr" className="w-full h-full">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen w-full flex flex-col 
-          bg-gradient-to-br from-black via-red-950 to-red-800 text-white overflow-x-hidden relative`}
+        className={`${inter.variable} antialiased min-h-screen w-full flex flex-col 
+          bg-gradient-to-br from-black via-red-950 to-red-800 text-white overflow-x-hidden relative font-sans`}
       >
         {/* 🔴 Глобална позадина */}
         <AnimatedBackground />

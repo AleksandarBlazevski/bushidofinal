@@ -2,58 +2,95 @@
 
 export default function Footer() {
   return (
-    <footer className="relative z-20 w-full bg-black/80 backdrop-blur-md text-zinc-300 py-8 border-t border-red-900">
-      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-6">
+    <footer
+      className="relative z-20 w-full bg-black/30 backdrop-blur-sm text-zinc-200 py-10 border-t border-red-700 font-sans"
+      style={{ fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" }}
+    >
+      <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
 
         {/* Лого и текст блиску */}
-        <div className="flex items-center gap-4 md:gap-6 flex-shrink-0">
-          <img src="/logo.png" alt="Bushido San Logo" className="h-20 object-contain" />
-          <div className="space-y-1 leading-snug max-w-xs">
-            <h3 className="text-red-500 text-lg font-semibold">Bushido San Karate Klub</h3>
-            <p>Wado-ryu karate škola, obogaćena elementima džudoa i džiu džicua.</p>
+        <div className="flex items-center gap-6 flex-shrink-0 max-w-xs">
+          <img
+            src="/logo.png"
+            alt="Bushido San Logo"
+            className="h-24 object-contain cursor-pointer transition-shadow duration-300 hover:drop-shadow-[0_0_10px_rgba(239,68,68,0.9)]"
+          />
+          <div className="space-y-2 leading-relaxed">
+            <h3
+              className="text-red-500 text-xl font-semibold
+                transition-colors duration-300 cursor-pointer hover:text-red-400 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.9)]"
+            >
+              Bushido San Karate Klub
+            </h3>
+            <p>
+              Wado-ryu karate škola, obogaćena elementima džudoa i džiu-džicua.
+            </p>
             <p>Sportski tim · Novi Beograd, Srbija</p>
           </div>
         </div>
 
-        {/* Контакт и друштвени мрежи во ист ред */}
-        <div className="flex items-center gap-12 flex-wrap justify-center md:justify-start w-full max-w-xl">
+        {/* Контакт, друштвени мрежи и NGC лого */}
+        <div className="flex flex-col md:flex-row items-center gap-12 w-full max-w-3xl justify-between">
 
-          {/* Kontakt */}
-          <div className="space-y-1 text-center md:text-left min-w-[180px]">
-            <h4 className="text-red-500 text-lg font-semibold mb-2">Kontakt</h4>
+          {/* Контакт */}
+          <div className="space-y-2 text-center md:text-left min-w-[200px]">
+            <h4
+              className="text-red-500 text-lg font-semibold mb-3
+                transition-colors duration-300 cursor-pointer hover:text-red-400 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.9)]"
+            >
+              Kontakt
+            </h4>
             <p>
               📍{" "}
               <a
                 href="https://www.google.com/maps?q=Bulevar+Arsenija+Čarnojevića+165,+Novi+Beograd"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-red-400 transition"
+                className="hover:text-red-400 transition-colors duration-300 hover:drop-shadow-[0_0_6px_rgba(239,68,68,0.7)]"
               >
-                Bulevar Arsenija Čarnojevića 165 (Pils Fitness)
+                Bulevar Arsenija Čarnojevića 165 (Puls Fitness)
               </a>
             </p>
             <p>
-              📞 <a href="tel:+381645798126" className="hover:text-red-400 transition">+381 64 5798126</a>
+              📞{" "}
+              <a
+                href="tel:+381645798126"
+                className="hover:text-red-400 transition-colors duration-300 hover:drop-shadow-[0_0_6px_rgba(239,68,68,0.7)]"
+              >
+                +381 64 5798126
+              </a>
             </p>
             <p>
-              ✉️ <a href="mailto:bushido.san3@gmail.com" className="hover:text-red-400 transition">bushido.san3@gmail.com</a>
+              ✉️{" "}
+              <a
+                href="mailto:bushido.san3@gmail.com"
+                className="hover:text-red-400 transition-colors duration-300 hover:drop-shadow-[0_0_6px_rgba(239,68,68,0.7)]"
+              >
+                bushido.san3@gmail.com
+              </a>
             </p>
           </div>
 
-          {/* Društvene mreže */}
-          <div className="space-y-1 text-center md:text-left min-w-[180px]">
-            <h4 className="text-red-500 text-lg font-semibold mb-2">Društvene mreže</h4>
-            <div className="flex items-center justify-center md:justify-start gap-6">
+          {/* Друштвени мрежи */}
+          <div className="space-y-2 text-center md:text-left min-w-[200px]">
+            <h4
+              className="text-red-500 text-lg font-semibold mb-3
+                transition-colors duration-300 cursor-pointer hover:text-red-400 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.9)]"
+            >
+              Društvene mreže
+            </h4>
+            <div className="flex items-center justify-center md:justify-start gap-8">
               <a
                 href="https://www.instagram.com/_bushido_san_/"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Instagram"
+                className="hover:opacity-70 transition-opacity duration-300 hover:drop-shadow-[0_0_6px_rgba(239,68,68,0.7)]"
               >
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/2111/2111463.png"
                   alt="Instagram"
-                  className="w-6 h-6 hover:opacity-70 transition"
+                  className="w-7 h-7"
                 />
               </a>
               <a
@@ -61,34 +98,39 @@ export default function Footer() {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Facebook"
+                className="hover:opacity-70 transition-opacity duration-300 hover:drop-shadow-[0_0_6px_rgba(239,68,68,0.7)]"
               >
                 <img
                   src="https://cdn-icons-png.flaticon.com/512/733/733547.png"
                   alt="Facebook"
-                  className="w-6 h-6 hover:opacity-70 transition"
+                  className="w-7 h-7"
                 />
               </a>
             </div>
           </div>
 
+          {/* NGC лого */}
+          <div className="flex flex-col items-center md:items-end min-w-[140px]">
+            <a
+              href="https://www.ngc.mk/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mb-1"
+            >
+              <img
+                src="/ngc-logo.png"
+                alt="NGC - Next Generation Code"
+                className="h-14 cursor-pointer transition-opacity duration-300 hover:opacity-80 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.9)]"
+              />
+            </a>
+            <span className="text-xs text-zinc-400 select-none">Izradio NGC</span>
+          </div>
         </div>
       </div>
 
-      {/* Donji red */}
-      <div className="mt-4 text-center text-xs text-zinc-500">
+      {/* Донен ред со авторски права */}
+      <div className="mt-8 text-center text-sm text-zinc-400">
         &copy; {new Date().getFullYear()} Bushido San Karate Klub. Sva prava zadržana.
-      </div>
-
-      {/* NGC logo i tekst */}
-      <div className="mt-4 text-center flex flex-col items-center gap-2">
-        <a href="https://www.ngc.mk/" target="_blank" rel="noopener noreferrer" className="inline-block">
-          <img
-            src="/ngc-logo.png"
-            alt="NGC - Next Generation Code"
-            className="h-12 cursor-pointer hover:opacity-80 transition"
-          />
-        </a>
-        <span className="text-xs text-zinc-500 select-none">Izradio NGC</span>
       </div>
     </footer>
   );
