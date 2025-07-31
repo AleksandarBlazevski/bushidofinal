@@ -95,7 +95,7 @@ export default function AboutPage() {
           O nama
         </h1>
 
-        {[
+        {[ 
           `Karate klub `,
           `Stil koji se vežba u ovom klubu je redak u Srbiji, a on u sebi, pored karate tehnika, sadrži i elemente iz džudoa i điudžice.`,
           `Metodologija treninga bazira se pre svega na disciplini i pedagoškim vrednostima, dok ako govorimo o psiho-fizičkim veštinama, akcenat se pored tehnika, taktika i motoričkih vežbi, stavlja na jačanju mentalnog sklopa, samokontroli i strpljenju.`,
@@ -130,7 +130,7 @@ export default function AboutPage() {
               key={index}
               onClick={() => toggleCard(index)}
               className={`bg-zinc-800 rounded-2xl p-8 cursor-pointer select-none shadow-lg transition-shadow duration-300 flex flex-col items-center
-                hover:shadow-[0_0_15px_4px_rgba(239,68,68,0.7)]`}
+                hover:shadow-[0_0_20px_5px_rgba(239,68,68,0.85)] hover:text-red-400`}
               style={{ minHeight: "510px" }}
             >
               <img
@@ -172,26 +172,26 @@ export default function AboutPage() {
           ))}
         </div>
 
-        {/* Dodatna sekcija za termine treninga */}
+        {/* Sekcija termini treninga sa glow efekt */}
         <section className="mt-16 max-w-4xl mx-auto bg-zinc-900 bg-opacity-70 rounded-2xl p-6 border border-red-600 shadow-md text-center text-zinc-300">
           <h2 className="text-3xl font-extrabold text-red-500 mb-6">
             Termini treninga
           </h2>
           <p className="mb-8 font-semibold text-lg">Od 1. septembra 2025. godine</p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-lg font-medium">
-            <div className="hover:text-red-500 transition cursor-default">
+            <div className="cursor-pointer rounded-2xl p-6 bg-zinc-800 border-2 border-red-600 shadow-lg transition-shadow duration-300 hover:shadow-[0_0_20px_5px_rgba(239,68,68,0.85)] hover:text-red-400">
               <p>📅 <strong>Ponedeljak</strong> u 18:30h</p>
               <p>📍 Hala sportova, Pariske komune 20</p>
             </div>
-            <div className="hover:text-red-500 transition cursor-default">
+            <div className="cursor-pointer rounded-2xl p-6 bg-zinc-800 border-2 border-red-600 shadow-lg transition-shadow duration-300 hover:shadow-[0_0_20px_5px_rgba(239,68,68,0.85)] hover:text-red-400">
               <p>📅 <strong>Utorak</strong> u 18:30h</p>
               <p>📍 Puls Fitness, Bulevar Arsenija Čarnojevića 165</p>
             </div>
-            <div className="hover:text-red-500 transition cursor-default">
+            <div className="cursor-pointer rounded-2xl p-6 bg-zinc-800 border-2 border-red-600 shadow-lg transition-shadow duration-300 hover:shadow-[0_0_20px_5px_rgba(239,68,68,0.85)] hover:text-red-400">
               <p>📅 <strong>Četvrtak</strong> u 20:00h</p>
               <p>📍 Hala sportova, Pariske komune 20</p>
             </div>
-            <div className="hover:text-red-500 transition cursor-default">
+            <div className="cursor-pointer rounded-2xl p-6 bg-zinc-800 border-2 border-red-600 shadow-lg transition-shadow duration-300 hover:shadow-[0_0_20px_5px_rgba(239,68,68,0.85)] hover:text-red-400">
               <p>📅 <strong>Petak</strong> u 18:30h</p>
               <p>📍 Puls Fitness, Bulevar Arsenija Čarnojevića 165</p>
             </div>

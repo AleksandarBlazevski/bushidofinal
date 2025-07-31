@@ -19,13 +19,16 @@ export default function Gallery() {
     );
 
   return (
-    <div className="px-4 py-8">
-      <h1 className="text-3xl font-bold mb-6 text-center">Галерија</h1>
+    <div className="px-4 py-8 bg-gradient-to-tr from-black via-zinc-900 to-red-950 min-h-screen text-zinc-300">
+      <h1 className="text-3xl font-bold mb-6 text-center text-red-500 drop-shadow-[0_0_8px_rgba(239,68,68,0.9)]">
+        Галерија
+      </h1>
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
         {images.map((img, index) => (
           <div
             key={index}
-            className="bg-white rounded-xl shadow hover:shadow-lg overflow-hidden cursor-pointer transition-transform hover:scale-105"
+            className="bg-zinc-800 rounded-xl shadow-lg cursor-pointer overflow-hidden transition-transform hover:scale-105 
+              border-2 border-red-600 hover:shadow-[0_0_15px_4px_rgba(239,68,68,0.8)]"
             onClick={() => setSelectedIndex(index)}
           >
             <Image
@@ -42,11 +45,11 @@ export default function Gallery() {
       {/* Modal */}
       {selectedIndex !== null && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 p-4"
+          className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4"
           onClick={closeModal}
         >
           <button
-            className="absolute top-4 right-6 text-white text-4xl font-bold z-60"
+            className="absolute top-4 right-6 text-white text-5xl font-bold z-60 drop-shadow-[0_0_12px_rgba(239,68,68,0.9)]"
             onClick={(e) => {
               e.stopPropagation();
               closeModal();
@@ -56,7 +59,7 @@ export default function Gallery() {
           </button>
 
           <button
-            className="absolute left-6 text-white text-4xl font-bold z-60 px-4 py-2 hover:text-red-500"
+            className="absolute left-6 text-white text-5xl font-bold z-60 px-4 py-2 hover:text-red-500 drop-shadow-[0_0_12px_rgba(239,68,68,0.9)]"
             onClick={(e) => {
               e.stopPropagation();
               showPrev();
@@ -66,7 +69,7 @@ export default function Gallery() {
           </button>
 
           <div
-            className="relative w-[90vw] max-w-[900px] h-[80vh] rounded-lg border-2 border-red-700 shadow-xl"
+            className="relative w-[90vw] max-w-[900px] h-[80vh] rounded-lg border-4 border-red-600 shadow-[0_0_25px_8px_rgba(239,68,68,0.9)]"
             onClick={(e) => e.stopPropagation()}
           >
             <Image
@@ -80,7 +83,7 @@ export default function Gallery() {
           </div>
 
           <button
-            className="absolute right-6 text-white text-4xl font-bold z-60 px-4 py-2 hover:text-red-500"
+            className="absolute right-6 text-white text-5xl font-bold z-60 px-4 py-2 hover:text-red-500 drop-shadow-[0_0_12px_rgba(239,68,68,0.9)]"
             onClick={(e) => {
               e.stopPropagation();
               showNext();
