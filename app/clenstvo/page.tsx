@@ -18,7 +18,7 @@ export default function ClanstvoForm() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     if (!form.ime || !form.prezime || !form.godina || !form.email || !form.telefon) {
@@ -26,18 +26,30 @@ export default function ClanstvoForm() {
       return;
     }
 
-    // Ovde možeš dodati poziv ka backend-u za čuvanje podataka
+    try {
+      const res = await fetch("/api/clanstvo", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
 
-    setStatus({ type: "success", message: "Uspešno ste se prijavili!" });
-
-    setForm({
-      ime: "",
-      prezime: "",
-      godina: "",
-      email: "",
-      telefon: "",
-      poruka: "",
-    });
+      if (res.ok) {
+        setStatus({ type: "success", message: "Uspešno ste se prijavili!" });
+        setForm({
+          ime: "",
+          prezime: "",
+          godina: "",
+          email: "",
+          telefon: "",
+          poruka: "",
+        });
+      } else {
+        const json = await res.json();
+        setStatus({ type: "error", message: json.error || "Greška prilikom slanja." });
+      }
+    } catch {
+      setStatus({ type: "error", message: "Greška prilikom povezivanja sa serverom." });
+    }
   };
 
   return (
@@ -58,13 +70,9 @@ export default function ClanstvoForm() {
         Prijava za članstvo
       </h1>
 
+      {/* Полето за Име */}
       <div>
-        <label
-          htmlFor="ime"
-          className="block mb-1 font-semibold
-            transition duration-300
-            hover:drop-shadow-[0_0_8px_rgba(255,0,0,0.8)] cursor-text"
-        >
+        <label htmlFor="ime" className="block mb-1 font-semibold transition duration-300 hover:drop-shadow-[0_0_8px_rgba(255,0,0,0.8)] cursor-text">
           Ime:
         </label>
         <input
@@ -74,19 +82,13 @@ export default function ClanstvoForm() {
           value={form.ime}
           onChange={handleChange}
           required
-          className="w-full p-3 rounded bg-zinc-800 border border-zinc-700 text-white
-            transition duration-300
-            hover:drop-shadow-[0_0_12px_rgba(255,0,0,0.7)] focus:drop-shadow-[0_0_12px_rgba(255,0,0,0.9)] outline-none"
+          className="w-full p-3 rounded bg-zinc-800 border border-zinc-700 text-white transition duration-300 hover:drop-shadow-[0_0_12px_rgba(255,0,0,0.7)] focus:drop-shadow-[0_0_12px_rgba(255,0,0,0.9)] outline-none"
         />
       </div>
 
+      {/* Полето за Презиме */}
       <div>
-        <label
-          htmlFor="prezime"
-          className="block mb-1 font-semibold
-            transition duration-300
-            hover:drop-shadow-[0_0_8px_rgba(255,0,0,0.8)] cursor-text"
-        >
+        <label htmlFor="prezime" className="block mb-1 font-semibold transition duration-300 hover:drop-shadow-[0_0_8px_rgba(255,0,0,0.8)] cursor-text">
           Prezime:
         </label>
         <input
@@ -96,19 +98,13 @@ export default function ClanstvoForm() {
           value={form.prezime}
           onChange={handleChange}
           required
-          className="w-full p-3 rounded bg-zinc-800 border border-zinc-700 text-white
-            transition duration-300
-            hover:drop-shadow-[0_0_12px_rgba(255,0,0,0.7)] focus:drop-shadow-[0_0_12px_rgba(255,0,0,0.9)] outline-none"
+          className="w-full p-3 rounded bg-zinc-800 border border-zinc-700 text-white transition duration-300 hover:drop-shadow-[0_0_12px_rgba(255,0,0,0.7)] focus:drop-shadow-[0_0_12px_rgba(255,0,0,0.9)] outline-none"
         />
       </div>
 
+      {/* Полето за Година */}
       <div>
-        <label
-          htmlFor="godina"
-          className="block mb-1 font-semibold
-            transition duration-300
-            hover:drop-shadow-[0_0_8px_rgba(255,0,0,0.8)] cursor-text"
-        >
+        <label htmlFor="godina" className="block mb-1 font-semibold transition duration-300 hover:drop-shadow-[0_0_8px_rgba(255,0,0,0.8)] cursor-text">
           Godina rođenja:
         </label>
         <input
@@ -120,19 +116,13 @@ export default function ClanstvoForm() {
           required
           min={1900}
           max={new Date().getFullYear()}
-          className="w-full p-3 rounded bg-zinc-800 border border-zinc-700 text-white
-            transition duration-300
-            hover:drop-shadow-[0_0_12px_rgba(255,0,0,0.7)] focus:drop-shadow-[0_0_12px_rgba(255,0,0,0.9)] outline-none"
+          className="w-full p-3 rounded bg-zinc-800 border border-zinc-700 text-white transition duration-300 hover:drop-shadow-[0_0_12px_rgba(255,0,0,0.7)] focus:drop-shadow-[0_0_12px_rgba(255,0,0,0.9)] outline-none"
         />
       </div>
 
+      {/* Полето за Email */}
       <div>
-        <label
-          htmlFor="email"
-          className="block mb-1 font-semibold
-            transition duration-300
-            hover:drop-shadow-[0_0_8px_rgba(255,0,0,0.8)] cursor-text"
-        >
+        <label htmlFor="email" className="block mb-1 font-semibold transition duration-300 hover:drop-shadow-[0_0_8px_rgba(255,0,0,0.8)] cursor-text">
           Email:
         </label>
         <input
@@ -142,19 +132,13 @@ export default function ClanstvoForm() {
           value={form.email}
           onChange={handleChange}
           required
-          className="w-full p-3 rounded bg-zinc-800 border border-zinc-700 text-white
-            transition duration-300
-            hover:drop-shadow-[0_0_12px_rgba(255,0,0,0.7)] focus:drop-shadow-[0_0_12px_rgba(255,0,0,0.9)] outline-none"
+          className="w-full p-3 rounded bg-zinc-800 border border-zinc-700 text-white transition duration-300 hover:drop-shadow-[0_0_12px_rgba(255,0,0,0.7)] focus:drop-shadow-[0_0_12px_rgba(255,0,0,0.9)] outline-none"
         />
       </div>
 
+      {/* Полето за Телефон */}
       <div>
-        <label
-          htmlFor="telefon"
-          className="block mb-1 font-semibold
-            transition duration-300
-            hover:drop-shadow-[0_0_8px_rgba(255,0,0,0.8)] cursor-text"
-        >
+        <label htmlFor="telefon" className="block mb-1 font-semibold transition duration-300 hover:drop-shadow-[0_0_8px_rgba(255,0,0,0.8)] cursor-text">
           Telefon:
         </label>
         <input
@@ -164,19 +148,13 @@ export default function ClanstvoForm() {
           value={form.telefon}
           onChange={handleChange}
           required
-          className="w-full p-3 rounded bg-zinc-800 border border-zinc-700 text-white
-            transition duration-300
-            hover:drop-shadow-[0_0_12px_rgba(255,0,0,0.7)] focus:drop-shadow-[0_0_12px_rgba(255,0,0,0.9)] outline-none"
+          className="w-full p-3 rounded bg-zinc-800 border border-zinc-700 text-white transition duration-300 hover:drop-shadow-[0_0_12px_rgba(255,0,0,0.7)] focus:drop-shadow-[0_0_12px_rgba(255,0,0,0.9)] outline-none"
         />
       </div>
 
+      {/* Полето за Порака (опционално) */}
       <div>
-        <label
-          htmlFor="poruka"
-          className="block mb-1 font-semibold
-            transition duration-300
-            hover:drop-shadow-[0_0_8px_rgba(255,0,0,0.8)] cursor-text"
-        >
+        <label htmlFor="poruka" className="block mb-1 font-semibold transition duration-300 hover:drop-shadow-[0_0_8px_rgba(255,0,0,0.8)] cursor-text">
           Poruka (opciono):
         </label>
         <textarea
@@ -185,26 +163,19 @@ export default function ClanstvoForm() {
           value={form.poruka}
           onChange={handleChange}
           rows={4}
-          className="w-full p-3 rounded bg-zinc-800 border border-zinc-700 text-white resize-none
-            transition duration-300
-            hover:drop-shadow-[0_0_12px_rgba(255,0,0,0.7)] focus:drop-shadow-[0_0_12px_rgba(255,0,0,0.9)] outline-none"
+          className="w-full p-3 rounded bg-zinc-800 border border-zinc-700 text-white resize-none transition duration-300 hover:drop-shadow-[0_0_12px_rgba(255,0,0,0.7)] focus:drop-shadow-[0_0_12px_rgba(255,0,0,0.9)] outline-none"
         />
       </div>
 
       <button
         type="submit"
-        className="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded font-semibold transition-colors duration-300
-          hover:drop-shadow-[0_0_12px_rgba(255,0,0,0.9)]"
+        className="w-full bg-red-600 hover:bg-red-700 text-white py-3 rounded font-semibold transition-colors duration-300 hover:drop-shadow-[0_0_12px_rgba(255,0,0,0.9)]"
       >
         Pošalji
       </button>
 
       {status && (
-        <p
-          className={`mt-4 text-center font-semibold ${
-            status.type === "success" ? "text-green-500" : "text-red-500"
-          }`}
-        >
+        <p className={`mt-4 text-center font-semibold ${status.type === "success" ? "text-green-500" : "text-red-500"}`}>
           {status.message}
         </p>
       )}
