@@ -5,7 +5,9 @@ declare global {
 }
 
 const uri = process.env.MONGODB_URI!;
-const options = {};
+const options = {
+  tls: true,
+};
 
 let client: MongoClient;
 let clientPromise: Promise<MongoClient>;
