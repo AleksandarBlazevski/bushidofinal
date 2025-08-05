@@ -20,9 +20,19 @@ export default function Gallery() {
 
   return (
     <div className="px-4 py-8 bg-gradient-to-tr from-black via-zinc-900 to-red-950 min-h-screen text-zinc-300">
-      <h1 className="text-3xl font-bold mb-6 text-center text-red-500 drop-shadow-[0_0_8px_rgba(239,68,68,0.9)]">
-        Галерија
+      {/* Naslov – Galerija */}
+      <h1
+        className="
+          text-3xl md:text-4xl font-bold mb-8 text-center text-red-500 select-none
+          drop-shadow-[0_0_8px_rgba(239,68,68,0.8)]
+          transition duration-300
+          hover:drop-shadow-[0_0_14px_rgba(239,68,68,1)]
+        "
+      >
+        Galerija
       </h1>
+
+      {/* Galerija slika */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
         {images.map((img, index) => (
           <div
@@ -33,7 +43,7 @@ export default function Gallery() {
           >
             <Image
               src={`/gallery/${img}`}
-              alt={`Слика ${index + 1}`}
+              alt={`Slika ${index + 1}`}
               width={300}
               height={300}
               className="object-cover w-full h-[200px]"
@@ -42,12 +52,13 @@ export default function Gallery() {
         ))}
       </div>
 
-      {/* Modal */}
+      {/* Modal slika */}
       {selectedIndex !== null && (
         <div
           className="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 p-4"
           onClick={closeModal}
         >
+          {/* Close button */}
           <button
             className="absolute top-4 right-6 text-white text-5xl font-bold z-60 drop-shadow-[0_0_12px_rgba(239,68,68,0.9)]"
             onClick={(e) => {
@@ -58,6 +69,7 @@ export default function Gallery() {
             &times;
           </button>
 
+          {/* Previous */}
           <button
             className="absolute left-6 text-white text-5xl font-bold z-60 px-4 py-2 hover:text-red-500 drop-shadow-[0_0_12px_rgba(239,68,68,0.9)]"
             onClick={(e) => {
@@ -68,13 +80,14 @@ export default function Gallery() {
             &#8592;
           </button>
 
+          {/* Selected image */}
           <div
             className="relative w-[90vw] max-w-[900px] h-[80vh] rounded-lg border-4 border-red-600 shadow-[0_0_25px_8px_rgba(239,68,68,0.9)]"
             onClick={(e) => e.stopPropagation()}
           >
             <Image
               src={`/gallery/${images[selectedIndex]}`}
-              alt={`Слика ${selectedIndex + 1}`}
+              alt={`Slika ${selectedIndex + 1}`}
               fill
               sizes="(max-width: 900px) 90vw, 900px"
               style={{ objectFit: "contain" }}
@@ -82,6 +95,7 @@ export default function Gallery() {
             />
           </div>
 
+          {/* Next */}
           <button
             className="absolute right-6 text-white text-5xl font-bold z-60 px-4 py-2 hover:text-red-500 drop-shadow-[0_0_12px_rgba(239,68,68,0.9)]"
             onClick={(e) => {
