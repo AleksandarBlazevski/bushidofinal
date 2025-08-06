@@ -1,12 +1,27 @@
 import { NextResponse } from "next/server";
 import clientPromise from "@/lib/mongodb";
 
+interface ClanstvoData {
+  ime: string;
+  prezime: string;
+  godina: number;
+  email: string;
+  telefon: string;
+  poruka?: string;
+}
+
 export async function POST(request: Request) {
   try {
-    const data = await request.json();
-    const { ime, prezime, godina, email, telefon, poruka } = data;
+    const data: ClanstvoData = await request.json();
 
-    if (!ime || !prezime || !godina || !email || !telefon) {
+    // Trim и проверки
+    if (
+      !data.ime?.trim() ||
+      !data.prezime?.trim() ||
+      !data.godina ||
+      !data.email?.trim() ||
+      !data.telefon?.trim()
+    ) {
       return NextResponse.json(
         { error: "Сите задолжителни полиња мора да бидат пополнети." },
         { status: 400 }
@@ -17,12 +32,12 @@ export async function POST(request: Request) {
     const db = client.db("bushidosan");
 
     await db.collection("clanstvo").insertOne({
-      ime,
-      prezime,
-      godina,
-      email,
-      telefon,
-      poruka: poruka || "",
+      ime: data.ime.trim(),
+      prezime: data.prezime.trim(),
+      godina: data.godina,
+      email: data.email.trim(),
+      telefon: data.telefon.trim(),
+      poruka: data.poruka?.trim() || "",
       createdAt: new Date(),
     });
 

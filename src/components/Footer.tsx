@@ -7,7 +7,6 @@ export default function Footer() {
       style={{ fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" }}
     >
       <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-8">
-
         {/* Лого и текст блиску */}
         <div className="flex items-center gap-6 flex-shrink-0 max-w-xs">
           <img
@@ -29,7 +28,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Контакт, друштвени мрежи и NGC лого */}
+        {/* Контакт, друштвени мрежи и NGC секција */}
         <div className="flex flex-col md:flex-row items-center gap-12 w-full max-w-3xl justify-between">
 
           {/* Контакт */}
@@ -109,22 +108,25 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* NGC лого */}
-          <div className="flex flex-col items-center md:items-end min-w-[140px]">
+          {/* NGC лого над текстот */}
+          <div className="flex flex-col items-center md:items-end text-center min-w-[200px] group">
             <a
               href="https://www.ngc.mk/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-block mb-1"
+              className="flex flex-col items-center"
             >
               <img
                 src="/ngc-logo.png"
                 alt="NGC - Next Generation Code"
-                className="h-14 cursor-pointer transition-opacity duration-300 hover:opacity-80 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.9)]"
+                className="h-14 w-auto mb-2 cursor-pointer transition-opacity duration-300 group-hover:opacity-80 group-hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.9)]"
               />
+              <p className="text-sm font-semibold text-zinc-300 tracking-wide transition duration-300 group-hover:text-red-400 group-hover:drop-shadow-[0_0_6px_rgba(239,68,68,0.8)]">
+                Next Generation Code
+              </p>
             </a>
-            <span className="text-xs text-zinc-400 select-none">Izradio NGC</span>
           </div>
+
         </div>
       </div>
 
