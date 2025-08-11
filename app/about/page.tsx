@@ -128,52 +128,63 @@ export default function AboutPage() {
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
-          {trainers.map((trainer, index) => (
-            <div
-              key={index}
-              onClick={() => toggleCard(index)}
-              className={`bg-zinc-800 rounded-2xl p-8 cursor-pointer select-none shadow-lg transition-shadow duration-300 flex flex-col items-center
-                hover:shadow-[0_0_20px_5px_rgba(239,68,68,0.85)] hover:text-red-400`}
-              style={{ minHeight: "auto" }}
-            >
-              <div className="w-full h-56 mb-6 flex justify-center items-center overflow-hidden rounded-xl border-2 border-red-600 bg-zinc-900">
-                <img
-                  src={trainer.imgSrc}
-                  alt={trainer.alt}
-                  className="max-h-full max-w-full object-contain"
-                  loading="lazy"
-                />
-              </div>
-              <h3 className="text-3xl font-extrabold text-red-500 mb-4 text-center break-words whitespace-normal leading-tight">
-                {trainer.name}{" "}
-                {trainer.rank && (
-                  <span className="text-red-400 font-semibold text-xl">
-                    - {trainer.rank}
-                  </span>
-                )}
-              </h3>
-
-              {openIndex === index ? (
-                <div
-                  className="text-zinc-300 text-lg leading-relaxed max-w-xs text-center"
-                  style={{ transition: "all 0.3s ease" }}
-                >
-                  <p className="mb-3 font-semibold">
-                    Rođen: {trainer.birthDate}, {trainer.birthPlace}
-                  </p>
-                  {trainer.bio.map((line, i) => (
-                    <p key={i} className="mb-3">
-                      {line}
-                    </p>
-                  ))}
+          {trainers.map((trainer, index) => {
+            const isOpen = openIndex === index;
+            return (
+              <div
+                key={index}
+                onClick={() => toggleCard(index)}
+                className={`bg-zinc-800 rounded-2xl p-8 cursor-pointer select-none shadow-lg transition-shadow duration-300 flex flex-col items-center
+                  hover:shadow-[0_0_20px_5px_rgba(239,68,68,0.85)] hover:text-red-400`}
+                style={{ minHeight: "auto" }}
+              >
+                <div className="w-full h-56 mb-6 flex justify-center items-center overflow-hidden rounded-xl border-2 border-red-600 bg-zinc-900">
+                  <img
+                    src={trainer.imgSrc}
+                    alt={trainer.alt}
+                    className="max-h-full max-w-full object-contain"
+                    loading="lazy"
+                  />
                 </div>
-              ) : (
-                <p className="text-lg text-zinc-400 italic max-w-xs text-center select-none">
-                  Klikni za detalje
-                </p>
-              )}
-            </div>
-          ))}
+                <h3 className="text-3xl font-extrabold text-red-500 mb-4 text-center break-words whitespace-normal leading-tight">
+                  {trainer.name}{" "}
+                  {trainer.rank && (
+                    <span className="text-red-400 font-semibold text-xl">
+                      - {trainer.rank}
+                    </span>
+                  )}
+                </h3>
+
+                <div
+                  style={{
+                    maxHeight: isOpen ? 500 : 0,
+                    overflow: "hidden",
+                    transition: "max-height 0.3s ease",
+                    width: "100%",
+                  }}
+                >
+                  {isOpen && (
+                    <div className="text-zinc-300 text-lg leading-relaxed max-w-xs text-center mx-auto">
+                      <p className="mb-3 font-semibold">
+                        Rođen: {trainer.birthDate}, {trainer.birthPlace}
+                      </p>
+                      {trainer.bio.map((line, i) => (
+                        <p key={i} className="mb-3">
+                          {line}
+                        </p>
+                      ))}
+                    </div>
+                  )}
+                </div>
+
+                {!isOpen && (
+                  <p className="text-lg text-zinc-400 italic max-w-xs text-center select-none mt-4">
+                    Klikni za detalje
+                  </p>
+                )}
+              </div>
+            );
+          })}
         </div>
 
         {/* Sekcija termini treninga sa glow efekt */}
