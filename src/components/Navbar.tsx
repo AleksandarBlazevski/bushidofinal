@@ -20,7 +20,7 @@ export default function Navbar() {
       style={{ fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif" }}
     >
       <div className="w-full flex justify-between items-center py-4 px-0 md:px-4">
-        {/* Лого и текст – цврсто лево, без padding лево */}
+        {/* Лого и текст */}
         <div className="flex items-center space-x-3 flex-shrink-0 pl-4 md:pl-0">
           <Link href="/">
             <img
@@ -64,7 +64,7 @@ export default function Navbar() {
 
         {/* Hamburger за мобилен */}
         <button
-          className="md:hidden flex items-center px-4 py-2 border border-white rounded text-white hover:text-red-500 hover:border-red-500 transition mr-4"
+          className="md:hidden flex items-center px-4 py-2 border border-white rounded text-white hover:text-red-500 hover:border-red-500 transition mr-4 focus:outline-none"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
         >
@@ -82,9 +82,13 @@ export default function Navbar() {
         </button>
       </div>
 
-      {/* Мобилно мени - цел екран ширина, но со padding */}
-      {menuOpen && (
-        <ul className="md:hidden bg-zinc-800 border-t border-red-600 py-4 space-y-4 px-4">
+      {/* Мобилно мени - анимирано */}
+      <div
+        className={`md:hidden bg-zinc-800 border-t border-red-600 overflow-auto transition-max-height duration-300 ease-in-out px-4 ${
+          menuOpen ? "max-h-96 py-4" : "max-h-0 py-0"
+        }`}
+      >
+        <ul className="space-y-4">
           {navLinks.map(({ href, label }) => (
             <li key={href}>
               <Link
@@ -101,7 +105,7 @@ export default function Navbar() {
             </li>
           ))}
         </ul>
-      )}
+      </div>
     </nav>
   );
 }

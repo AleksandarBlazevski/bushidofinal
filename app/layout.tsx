@@ -1,12 +1,11 @@
 // src/app/layout.tsx
 import type { Metadata } from "next";
-import { Inter } from "next/font/google"; // вметнуваме Inter font
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import AnimatedBackground from "@/components/AnimatedBackground"; // додадено
+import AnimatedBackground from "@/components/AnimatedBackground";
 
-// Креираме Inter font instance со variable CSS property за Tailwind
 const inter = Inter({
   subsets: ["latin"],
   variable: "--font-inter",
@@ -36,7 +35,7 @@ export default function RootLayout({
         <Navbar />
 
         {/* Главна содржина */}
-        <main className="flex-grow w-full px-6 py-10 bg-transparent relative z-10">
+        <main className="flex-grow w-full px-4 sm:px-6 py-6 sm:py-10 bg-transparent relative z-10">
           {children}
         </main>
 

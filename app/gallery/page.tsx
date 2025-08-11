@@ -38,15 +38,17 @@ export default function Gallery() {
           <div
             key={index}
             className="bg-zinc-800 rounded-xl shadow-lg cursor-pointer overflow-hidden transition-transform hover:scale-105 
-              border-2 border-red-600 hover:shadow-[0_0_15px_4px_rgba(239,68,68,0.8)]"
+              border-2 border-red-600 hover:shadow-[0_0_15px_4px_rgba(239,68,68,0.8)]
+              aspect-square relative"
             onClick={() => setSelectedIndex(index)}
           >
             <Image
               src={`/gallery/${img}`}
               alt={`Slika ${index + 1}`}
-              width={300}
-              height={300}
-              className="object-cover w-full h-[200px]"
+              fill
+              className="object-cover"
+              sizes="(max-width: 768px) 50vw, (max-width: 1024px) 33vw, (max-width: 1280px) 25vw, 20vw"
+              priority={index === 0}
             />
           </div>
         ))}

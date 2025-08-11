@@ -134,15 +134,16 @@ export default function AboutPage() {
               onClick={() => toggleCard(index)}
               className={`bg-zinc-800 rounded-2xl p-8 cursor-pointer select-none shadow-lg transition-shadow duration-300 flex flex-col items-center
                 hover:shadow-[0_0_20px_5px_rgba(239,68,68,0.85)] hover:text-red-400`}
-              style={{ minHeight: "510px" }}
+              style={{ minHeight: "auto" }}
             >
-              <img
-                src={trainer.imgSrc}
-                alt={trainer.alt}
-                className="w-full h-64 object-cover rounded-xl border-2 border-red-600 mb-6"
-                loading="lazy"
-                style={{ objectPosition: "center top" }}
-              />
+              <div className="w-full h-56 mb-6 flex justify-center items-center overflow-hidden rounded-xl border-2 border-red-600 bg-zinc-900">
+                <img
+                  src={trainer.imgSrc}
+                  alt={trainer.alt}
+                  className="max-h-full max-w-full object-contain"
+                  loading="lazy"
+                />
+              </div>
               <h3 className="text-3xl font-extrabold text-red-500 mb-4 text-center break-words whitespace-normal leading-tight">
                 {trainer.name}{" "}
                 {trainer.rank && (
