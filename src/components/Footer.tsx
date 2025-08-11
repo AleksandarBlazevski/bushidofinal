@@ -16,13 +16,15 @@ export default function Footer() {
           />
           <div className="space-y-2 leading-relaxed">
             <h3
-              className="text-red-500 text-xl font-semibold
+              className="text-red-500 text-xl font-semibold leading-tight
                 transition-colors duration-300 cursor-pointer hover:text-red-400 hover:drop-shadow-[0_0_8px_rgba(239,68,68,0.9)]"
             >
-              Bushido San Karate Klub
+              Karate Klub
+              <br />
+              BUSHIDO SAN
             </h3>
             <p>
-              Wado-ryu karate škola, obogaćena elementima džudoa i džiu-džicua.
+              Wado-ryu karate škola, sa elementima džudoa i džiu-džicue.
             </p>
             <p>Sportski tim · Novi Beograd, Srbija</p>
           </div>
